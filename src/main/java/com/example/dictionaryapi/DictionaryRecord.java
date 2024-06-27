@@ -9,15 +9,15 @@ public class DictionaryRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "dictionary_id")
+    private Dictionary dictionary;
+
     @ElementCollection
     @CollectionTable(name = "record_fields", joinColumns = @JoinColumn(name = "record_id"))
     @MapKeyColumn(name = "field_name")
     @Column(name = "field_value")
     private Map<String, String> fields;
-
-    @ManyToOne
-    @JoinColumn(name = "dictionary_id")
-    private Dictionary dictionary;
 
     // Getters and setters
     public Long getId() {
@@ -28,19 +28,19 @@ public class DictionaryRecord {
         this.id = id;
     }
 
-    public Map<String, String> getFields() {
-        return fields;
-    }
-
-    public void setFields(Map<String, String> fields) {
-        this.fields = fields;
-    }
-
     public Dictionary getDictionary() {
         return dictionary;
     }
 
     public void setDictionary(Dictionary dictionary) {
         this.dictionary = dictionary;
+    }
+
+    public Map<String, String> getFields() {
+        return fields;
+    }
+
+    public void setFields(Map<String, String> fields) {
+        this.fields = fields;
     }
 }

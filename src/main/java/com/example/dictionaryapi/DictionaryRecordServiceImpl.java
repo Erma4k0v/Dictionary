@@ -41,18 +41,23 @@ public class DictionaryRecordServiceImpl implements DictionaryRecordService {
 
     @Override
     public DictionaryRecord updateRecord(String dictionaryName, Long id, DictionaryRecord updatedRecord) {
+        // Найти словарь по имени
         Dictionary dictionary = dictionaryRepository.findByName(dictionaryName)
                 .orElseThrow(() -> new DictionaryController.ResourceNotFoundException("Dictionary not found"));
 
+        // Найти существующую запись для обновления
         DictionaryRecord existingRecord = dictionaryRecordRepository.findById(id)
                 .orElseThrow(() -> new DictionaryController.ResourceNotFoundException("Record not found"));
 
-        // Validate the record against the dictionary structure
+        // Проверить соответствие записи структуре словаря
         if (!isValidRecord(updatedRecord.getFields(), dictionary.getStructure())) {
             throw new IllegalArgumentException("Record does not match dictionary structure");
         }
 
+        // Обновить поля существующей записи
         existingRecord.setFields(updatedRecord.getFields());
+
+        // Сохранить обновленную запись
         return dictionaryRecordRepository.save(existingRecord);
     }
 
