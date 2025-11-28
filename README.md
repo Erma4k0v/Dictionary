@@ -16,7 +16,6 @@ Spring Boot приложение для создания и управления
 - JSON API  
 
 ## 📄 Пример запроса (создание словаря)
-```json
 POST /dictionaries
 {
   "name": "products",
@@ -24,15 +23,8 @@ POST /dictionaries
 }
 
 ## 🐳 Запуск через Docker
-bash
-Копировать код
 docker build -t dictionary-app .
 docker run -p 8080:8080 dictionary-app
 
 ## ▶ Локальный запуск
-bash
-Копировать код
 mvn spring-boot:run
-
-## 📞 Контакты
-Лев Ермачков — levermackov78390@gmail.com
